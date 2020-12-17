@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2020", "DOM"]
+    },
+    "include": ["day3-2.ts"]
+}
