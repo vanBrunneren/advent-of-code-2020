@@ -1125,7 +1125,7 @@ function replaceNewlineToBlank(inputString: string) : string {
 }
 
 function isBetweenNumbers(number: number, minNumber: number, maxNumber: number) : boolean {
-    return number >= minNumber && number <= maxNumber;
+    return Number(number) >= minNumber && Number(number) <= maxNumber;
 }
 
 function calculateHeightWithUnit(unit: string, height: number) : boolean {
@@ -1144,9 +1144,9 @@ let conditionObject = {
     "iyr": issueYear => issueYear.length === 4 && isBetweenNumbers(issueYear, 2010, 2020), 
     "eyr": expYear => expYear.length === 4 && isBetweenNumbers(expYear, 2020, 2030),
     "hgt": height => calculateHeight(height),
-    "hcl": hairColor => /^#[0-9a-f]{6}$/.test(hairColor), 
-    "ecl": eyeColor => ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].includes(eyeColor), 
-    "pid": passportId => /^[0-9]{9}$/.test(passportId)
+    "hcl": hairColor => RegExp(/^#[0-9a-f]{6}$/).test(hairColor), 
+    "ecl": eyeColor => ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].includes(eyeColor),
+    "pid": passportId => RegExp(/^[0-9]{9}$/).test(passportId)
 }
 
 function checkCondition(keyValue: string[]) {
@@ -1161,14 +1161,14 @@ function countOccasionsInLine(line: string) : boolean {
         .split(" ")
         .map(pair => pair.split(":"))
         .map(checkCondition)
-        .every(value => value == true);        
+        .every(val => val === true);        
 }
 
 let count = input
     .split("\n\n")
     .map(replaceNewlineToBlank)
     .map(countOccasionsInLine)
-    .filter(entry => entry == true)
+    .filter(entry => entry === true)
     .length;
 
 

@@ -1,4 +1,4 @@
-const input = `eyr:2024 pid:662406624 hcl:#cfa07d byr:1947 iyr:2015 ecl:amb hgt:150cm
+export default `eyr:2024 pid:662406624 hcl:#cfa07d byr:1947 iyr:2015 ecl:amb hgt:150cm
 
 iyr:2013 byr:1997 hgt:182cm hcl:#ceb3a1
 eyr:2027
@@ -1119,31 +1119,3 @@ byr:1953 hcl:#866857 eyr:2021 iyr:2012 pid:158898193
 
 eyr:2030 pid:039638764 ecl:hzl hgt:190cm byr:1926
 cid:294 hcl:#b6652a iyr:2017`;
-
-function replaceNewlineToBlank(inputString: string) : string {
-    return inputString.split("\n").join(" ");
-}
-
-function countOccasionsInLine(line: string)  {
-    let actualKeys = line
-            .split(" ")
-            .map(pair => pair.split(":"))
-            .map(pair => pair[0]);
-
-    return searchKeys
-        .filter(searchKey => actualKeys.indexOf(searchKey) != -1)
-        .length == searchKeys.length;
-        
-}
-
-let searchKeys = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
-
-let count = input
-    .split("\n\n")
-    .map(replaceNewlineToBlank)
-    .map(countOccasionsInLine)
-    .filter(occasion => occasion)
-    .length;
-
-
-console.log(count);
